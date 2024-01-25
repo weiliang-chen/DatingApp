@@ -10,15 +10,14 @@ import { User } from './_models/user';
 export class AppComponent implements OnInit {
   title = 'Dating app';
 
-  constructor(
-    private accountService: AccountService
-  ) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
   }
 
   setCurrentUser() {
+    if (typeof localStorage == "undefined") return;
     const userString = localStorage.getItem('user');
     if (!userString) return;
     const user: User = JSON.parse(userString);
