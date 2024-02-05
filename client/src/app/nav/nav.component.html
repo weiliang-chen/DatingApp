@@ -31,7 +31,7 @@
         >Welcome {{ user.username | titlecase }}</a
       >
       <div class="dropdown-menu" ngbDropdownMenu>
-        <a class="dropdown-item" ngbDropdownItem>Edit Profile</a>
+        <a class="dropdown-item" ngbDropdownItem routerLink="/member/edit">Edit Profile</a>
         <a class="dropdown-item" ngbDropdownItem (click)="logout()">Logout</a>
       </div>
     </div>

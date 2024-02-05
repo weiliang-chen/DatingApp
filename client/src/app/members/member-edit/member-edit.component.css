@@ -1,0 +1,30 @@
+.img-thumbnail {
+    margin: 26px;
+    width: 85%;
+    height: 85%;
+  }
+  
+  .card-body {
+    padding: 0 25px;
+  }
+  
+  .card-footer {
+    padding: 10px 15px;
+    background-color: #fff;
+    border-top: none;
+  }
+  
+  
+  .nav-tabs button.active {
+    position: relative;
+    color: #333333;
+    border: 0;
+    border-bottom: 4px solid #e95420;
+  } 
+  
+  .nav-tabs {
+    background: none !important;
+    color: #333333;
+  }
+  
+  
