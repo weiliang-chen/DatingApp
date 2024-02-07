@@ -22,6 +22,7 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { jwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { PhotoEditComponent } from './members/photo-edit/photo-edit.component';
 
 
 
@@ -39,6 +40,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     ServerErrorComponent,
     MemberCardComponent,
     MemberEditComponent,
+    PhotoEditComponent,
   ],
   imports: [
     BrowserModule,
