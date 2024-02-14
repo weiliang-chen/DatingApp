@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [],
@@ -13,9 +16,19 @@ import { NgxSpinnerModule } from "ngx-spinner";
       positionClass: 'toast-bottom-right',
     }),
     NgxSpinnerModule.forRoot({
-      type: 'line-scale-party'
-    })
+      type: 'line-scale-party',
+    }),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
-  exports: [NgbModule, ToastrModule, NgxSpinnerModule],
+  exports: [
+    NgbModule,
+    ToastrModule,
+    NgxSpinnerModule,
+    PaginationModule,
+    ButtonsModule,
+    TimeagoModule,
+  ],
 })
 export class SharedModule {}

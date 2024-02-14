@@ -25,10 +25,11 @@
       *ngIf="accountService.currentUser$ | async as user"
       ngbDropdown
     >
+      <!-- <img src="{{user.photoUrl || './assets/user.png'}} " alt="user photo"> -->
       <a
         class="dropdown-toggle text-light text-decoration-none"
         ngbDropdownToggle
-        >Welcome {{ user.username | titlecase }}</a
+        >Welcome {{ user.knownAs}}</a
       >
       <div class="dropdown-menu" ngbDropdownMenu>
         <a class="dropdown-item" ngbDropdownItem routerLink="/member/edit">Edit Profile</a>
