@@ -96,7 +96,7 @@
     },
     {
         "UserName": "Joni",
-        "Gender": "female",
+        "Gender": "male",
         "DateOfBirth": "1969-03-23",
         "KnownAs": "Joni",
         "Created": "2019-03-30",
@@ -115,7 +115,7 @@
       },
       {
         "UserName": "Danielle",
-        "Gender": "female",
+        "Gender": "male",
         "DateOfBirth": "1998-08-18",
         "KnownAs": "Danielle",
         "Created": "2019-12-22",
@@ -134,7 +134,7 @@
       },
       {
         "UserName": "Tammy",
-        "Gender": "female",
+        "Gender": "male",
         "DateOfBirth": "1975-10-23",
         "KnownAs": "Tammy",
         "Created": "2020-03-22",
@@ -153,7 +153,7 @@
       },
       {
         "UserName": "Letitia",
-        "Gender": "female",
+        "Gender": "male",
         "DateOfBirth": "1987-12-16",
         "KnownAs": "Letitia",
         "Created": "2020-04-20",
@@ -172,7 +172,7 @@
       },
       {
         "UserName": "Janet",
-        "Gender": "female",
+        "Gender": "male",
         "DateOfBirth": "1959-03-14",
         "KnownAs": "Janet",
         "Created": "2019-11-08",
