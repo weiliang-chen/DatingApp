@@ -19,12 +19,13 @@ export class MembersService {
   userParams: UserParams | undefined
 
   constructor(private http: HttpClient, private accountService: AccountService) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe({ // using take 1 so we dont need to unsubscribe when the request is completed
+    this.accountService.currentUser$.subscribe({ // using take 1 so we dont need to unsubscribe when the request is completed
       next: user => {
         if (user) {
           this.userParams = new UserParams(user);
           this.user = user;
         }
+        this.resetUserParams();
       }
     })   
   }
@@ -60,7 +61,7 @@ export class MembersService {
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
     
-    return this.getPaginatedResult<Member[]>(this.baseUrl, params).pipe(
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params).pipe(
       map(response => {
         this.memberCache.set(Object.values(userParams).join('-'), response);
         return response;
@@ -86,9 +87,21 @@ export class MembersService {
     );
   }
 
+
+  addLike(username: string) {
+  
+    return this.http.post(this.baseUrl + 'likes/' + username, {}); // past a empty object for the post method
+  }
+
+  getLikes(predicate: string, pageNumber: number, pageSize: number) {
+    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'likes', params);
+  }
+
   private getPaginatedResult<T>(url: string, params: HttpParams) {
-    const  paginatedResult: PaginatedResult<T> = new PaginatedResult<T>;
-    return this.http.get<T>(url+ 'users', { observe: 'response', params }).pipe(
+    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>;
+    return this.http.get<T>(url, { observe: 'response', params }).pipe(
       map(response => {
         if (response.body) {
           paginatedResult.result = response.body;
