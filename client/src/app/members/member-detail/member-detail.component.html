@@ -1,4 +1,4 @@
-<div class="row" *ngIf="member">
+<div class="row" >
   <div class="col-4">
     <div class="card">
       <img
@@ -27,14 +27,14 @@
       <div class="card-footer">
         <div class="btn-group d-flex">
           <button class="btn btn-primary">Like</button>
-          <button class="btn btn-success">Messages</button>
+          <button class="btn btn-success" (click)="selectTab(4)">Messages</button>
         </div>
       </div>
     </div>
   </div>
   <div class="col-8">
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-      <li ngbNavItem>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="active">
+      <li [ngbNavItem]="1">
         <button ngbNavLink (click)="offPhotos()">About {{ member.knownAs }}</button>
         <ng-template ngbNavContent>
           <h4>Description</h4>
@@ -43,23 +43,23 @@
           <p>{{ member.lookingFor }}</p>
         </ng-template>
       </li>
-      <li ngbNavItem>
+      <li [ngbNavItem]="2">
         <button ngbNavLink (click)="offPhotos()">Interests</button>
         <ng-template ngbNavContent>
           <h4>Interests</h4>
           <p>{{ member.interests }}</p>
         </ng-template>
       </li>
-      <li ngbNavItem >
+      <li [ngbNavItem]="3">
         <button ngbNavLink (click)="loadPhotos()">Photos</button>
         <ng-template ngbNavContent *ngIf="showGallery" >
           <gallery [items]="images" class="gallery"></gallery>
         </ng-template>
       </li>
-      <li ngbNavItem >
-        <button ngbNavLink (click)="offPhotos()">Messages</button>
+      <li [ngbNavItem]="4">
+        <button ngbNavLink (click)="loadMessages()">Messages</button>
         <ng-template ngbNavContent>
-          <p>Messages</p>
+          <app-member-messages [username]="member.userName" [messages]="messages"></app-member-messages>
         </ng-template>
       </li>
     </ul>
