@@ -1,0 +1,22 @@
+<h2>Admin panel</h2>
+<div class="tab-panel">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs" >
+        <li [ngbNavItem]="1" *appHasRole="['Admin']">
+          <button ngbNavLink>User management</button>
+          <ng-template ngbNavContent>
+            <div class="container">
+                <app-user-management></app-user-management>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2" *appHasRole="['Admin', 'Moderator']">
+          <button ngbNavLink >Photo management</button>
+          <ng-template ngbNavContent>
+            <div class="container">
+                <app-photo-management></app-photo-management>
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+</div>
