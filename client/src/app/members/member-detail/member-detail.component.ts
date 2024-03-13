@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../../_models/member';
 import { MembersService } from '../../_services/members.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,10 @@ import { MemberMessagesComponent } from '../member-messages/member-messages.comp
 import { MessageService } from '../../_services/message.service';
 import { Message } from '../../_models/message';
 import { NgbNav } from '@ng-bootstrap/ng-bootstrap';
+import { PresenceService } from '../../_services/presence.service';
+import { AccountService } from '../../_services/account.service';
+import { User } from '../../_models/user';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-member-detail',
@@ -24,19 +28,27 @@ import { NgbNav } from '@ng-bootstrap/ng-bootstrap';
     MemberMessagesComponent,
   ],
 })
-export class MemberDetailComponent implements OnInit {
+export class MemberDetailComponent implements OnInit, OnDestroy {
   @ViewChild('nav', {static: true}) nav?: NgbNav;
   member: Member = {} as Member; // initialize with an empty object, and should populate from the route resolver
   images: GalleryItem[] = [];
   showGallery = false;
   messages: Message[] = [];
   active: number = 1;
+  user?: User
 
   constructor(
-    private memberService: MembersService,
+    private accountService: AccountService,
     private route: ActivatedRoute,
-    private messagesService: MessageService
-  ) {}
+    private messagesService: MessageService,
+    public presenceService: PresenceService
+  ) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: user => {
+        if (user) this.user = user;
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe({
@@ -52,6 +64,10 @@ export class MemberDetailComponent implements OnInit {
     });
 
     this.getImages();
+  }
+
+  ngOnDestroy(): void {
+    this.messagesService.stopHubConnection();
   }
 
   getImages() {
@@ -81,8 +97,10 @@ export class MemberDetailComponent implements OnInit {
   selectTab(tab: number) {
     if (this.nav) {
       this.nav.select(tab);
-      if (tab == 4) {
-        this.loadMessages();
+      if (tab == 4 && this.user) {
+        this.messagesService.createHubConnection(this.user, this.member.userName);
+      } else {
+        this.messagesService.stopHubConnection();
       }
     }
   }
