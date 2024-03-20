@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for datingapp-2dd on 2024-03-20T17:09:59+11:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'datingapp-2dd'
+primary_region = 'syd'
+
+[build]
+  image = 'liang2dd/datingapp:latest'
+
+[env]
+  ASPNETCORE_URLS="http://+:8080"
+  CloudinarySettings__CloudName="dubzquy1l"
+  CloudinarySettings__ApiKey="848858683384269"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

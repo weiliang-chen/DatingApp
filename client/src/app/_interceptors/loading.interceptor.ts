@@ -7,8 +7,9 @@ import {
 
 import { Injectable } from '@angular/core';
 
-import { Observable, delay, finalize, } from 'rxjs';
+import { Observable, delay, finalize, identity, } from 'rxjs';
 import { BusyService } from '../_services/busy.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
@@ -22,7 +23,7 @@ export class LoadingInterceptor implements HttpInterceptor {
    this.busyService.loading();
 
     return next.handle(req).pipe(
-      delay(1000),
+      (environment.production ? identity : delay(1000)),
       finalize(() => {
         this.busyService.idel()
       })
